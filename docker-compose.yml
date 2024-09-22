@@ -1,0 +1,13 @@
+version: '3'
+services:
+  app:
+    image: my-python-app:latest
+    build:
+      context: .
+    ports:
+      - "5000:5000"
+    environment:
+      - OPERATOR=+
+      - NUMBER1=5
+      - NUMBER2=3
+      - CHOICE=1
