@@ -22,11 +22,13 @@ def menu():
     choice = os.getenv("CHOICE", "1").lower()  # Default to option 1 (calculation)
     if choice == '1':
         calc()
+        return True  # Add a return here for consistency
     elif choice == 'q':
-        return False  # Ensure all return statements are consistent
+        return False
     else:
         print(f'Invalid choice: {choice}')
-        return False  # Add return here for consistency
+        return False  # Ensure all branches return a value
+
 
 if __name__ == '__main__':
     menu()
