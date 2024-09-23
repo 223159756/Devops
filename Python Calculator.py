@@ -1,28 +1,31 @@
+"""
+This is a simple calculator script that supports basic operations.
+"""
+
 import os
 from operator import add, sub, mul
 
 def calc():
-    # Get the operator, number 1, and number 2 from environment variables
-    op = os.getenv("OPERATOR", "+")  # Default to '+'
-    n1 = int(os.getenv("NUMBER1", 0))  # Default to 0
-    n2 = int(os.getenv("NUMBER2", 0))  # Default to 0
-
-    operators = {'+': add(n1, n2), '-': sub(n1, n2), '*': mul(n1, n2)}
-    if op in operators:
-        print('{} {} {} = {}'.format(n1, op, n2, operators[op]))
+    """Perform calculation based on environment variables."""
+    operation = os.getenv("OPERATOR", "+")  # Default to addition if no operator provided
+    num1 = int(os.getenv("NUMBER1", "0"))
+    num2 = int(os.getenv("NUMBER2", "0"))
+    
+    operators = {'+': add(num1, num2), '-': sub(num1, num2), '*': mul(num1, num2)}
+    if operation in operators:
+        print(f'{num1} {operation} {num2} = {operators[operation]}')
     else:
-        print("Invalid operator: ", op)
+        print(f"Invalid operator: {operation}")
 
 def menu():
-    # Get the choice from environment variables (defaults to '1' to calculate)
-    choice = os.getenv("CHOICE", "1").lower()
+    """Handles menu using environment variable."""
+    choice = os.getenv("CHOICE", "1").lower()  # Default to option 1 (calculation)
     if choice == '1':
         calc()
     elif choice == 'q':
-        print("Quitting...")
         return False
     else:
-        print('Not a correct choice: <{}>, try again'.format(choice))
+        print(f'Invalid choice: {choice}')
 
 if __name__ == '__main__':
     menu()

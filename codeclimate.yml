@@ -1,23 +1,11 @@
 version: "2"
-checks:
-  argument-count:
-    enabled: true
-  method-complexity:
-    enabled: true
-
 engines:
-  structure:
+  pylint:
     enabled: true
-  duplication:
-    enabled: true
-  eslint:
-    enabled: false
     config:
-      config: .eslintrc.json
+      disable:
+        - "C0111"  # Disable missing docstring warnings
 
 ratings:
   paths:
     - "**/*.py"
-
-exclude_patterns:
-  - "tests/"
