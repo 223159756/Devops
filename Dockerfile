@@ -10,5 +10,5 @@ COPY . /app
 RUN pip install pytest
 
 # Run the Python script using shell form ("/bin/sh")
-CMD python3 Python\ Calculator.py
+CMD python3 python_calculator.py
 CMD ["pytest"]

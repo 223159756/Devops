@@ -10,7 +10,7 @@ def calc():
     operation = os.getenv("OPERATOR", "+")  # Default to addition if no operator provided
     num1 = int(os.getenv("NUMBER1", "0"))
     num2 = int(os.getenv("NUMBER2", "0"))
-    
+
     operators = {'+': add(num1, num2), '-': sub(num1, num2), '*': mul(num1, num2)}
     if operation in operators:
         print(f'{num1} {operation} {num2} = {operators[operation]}')
@@ -23,9 +23,10 @@ def menu():
     if choice == '1':
         calc()
     elif choice == 'q':
-        return False
+        return False  # Ensure all return statements are consistent
     else:
         print(f'Invalid choice: {choice}')
+        return False  # Add return here for consistency
 
 if __name__ == '__main__':
     menu()
