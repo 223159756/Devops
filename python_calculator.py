@@ -22,12 +22,12 @@ def menu():
     choice = os.getenv("CHOICE", "1").lower()  # Default to option 1 (calculation)
     if choice == '1':
         calc()
-        return True  # Add a return here for consistency
-    elif choice == 'q':
+        return True
+    if choice == 'q':  # Change "elif" to "if"
         return False
-    else:
-        print(f'Invalid choice: {choice}')
-        return False  # Ensure all branches return a value
+    print(f'Invalid choice: {choice}')
+    return False
+
 
 
 if __name__ == '__main__':
