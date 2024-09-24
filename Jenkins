@@ -1,0 +1,57 @@
+pipeline {
+    agent any
+    environment {
+        DIRECTORY_PATH = '/Users/adi/Desktop/SIT 223/6.3HD'
+        TESTING_ENVIRONMENT = '6.3HD pipeline'
+        PRODUCTION_ENVIRONMENT = 'ADITYA HINDOCHA'
+    
+    }
+    stages {
+        
+        
+        stage('Checkout') {
+            steps {
+                checkout([$class: 'GitSCM', branches: [[name: '*/main']], userRemoteConfigs: [[url: 'https://github.com/223159756/Devops/']]])
+            }
+        }
+        stage('Build with Docker') {
+            steps {
+                script {
+                    // Build Docker image
+                    sh '''
+                    docker build -t my-python-app .
+                    '''
+                }
+            }
+        }
+        stage('Run Tests') {
+            steps {
+                script {
+                    // Run tests using Pytest inside Docker
+                    sh 'docker run --rm my-python-app pytest'
+                    sh 'java -version'
+                }
+            }
+        }
+        stage('Code Quality Analysis') {
+            steps {
+                sh 'pylint python_calculator.py'
+            }
+        }
+        stage('Deploy with Docker Compose') {
+            steps {
+                script {
+                    // Deploy the app using Docker Compose
+                    sh 'docker-compose up -d'
+                }
+            }
+        }
+        stage('Release') {
+            steps {
+                script {
+                    sh 'docker-compose -f docker-compose.prod.yml up -d --build'
+                }
+            }
+        }
+    }
+}
